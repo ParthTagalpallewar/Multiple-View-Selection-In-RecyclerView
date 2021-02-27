@@ -19,31 +19,31 @@ class Emails {
                         date = "5 jun"
                 ), Email(
                 user = "Intershala",
-                subject = "Can you train us the way we teach student",
+                subject = "Do Your want intership",
                 stared = true,
-                preview = "we need your help",
+                preview = "Join Intershala",
                 date = "5 jun"
         ), Email(
-                user = "Book selling app",
-                subject = "Thanku for making me i am do help to lot of peoples",
-                preview = "welcome yar",
+                user = "Edeoda",
+                subject = "Join the learn the AWS for free",
+                preview = "Join fast to start class",
                 date = "5 jun"
         ), Email(
                 user = "Zomato",
-                subject = "Sir do you want free sevice",
-                preview = "No sorry",
+                subject = "Your delivery is ready",
+                preview = "Soon it will reach",
                 stared = true,
                 date = "5 jun"
         ), Email(
-                user = "Zomato",
-                subject = "Sir can you teach us how to cook",
+                user = "Udemy",
+                subject = "Join our cource now",
                 preview = "No i am busk right now!!",
                 date = "5 jun"
         ), Email(
                 user = "FlipCart",
-                subject = "Do you want our compony for free",
+                subject = "Your order is delivered",
                 stared = true,
-                preview = "Yes but i will donate it to poor people",
+                preview = "Thanku for ordering ",
                 date = "5 jun"
         ), Email(
                 user = "Acb",
