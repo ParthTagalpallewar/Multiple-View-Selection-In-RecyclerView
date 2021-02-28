@@ -1,16 +1,17 @@
-package com.example.utils
+package com.example.multiselectinrecyclerview.utils
 
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
+import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorInt
-import com.example.model.Email
+import com.example.multiselectinrecyclerview.model.Email
 
 fun Context.toast(msg: String){
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
@@ -69,9 +70,12 @@ fun ArrayList<Email>.selectEmail(position: Int,selectedItems: SparseBooleanArray
 
 fun ArrayList<Email>.unSelectAll(){
     for(email in this){
+
+        Log.d(startUp+"unselect All",email.user + "  "+email.selected)
         var selection = email.selected
         if (selection) {
-            selection = false
+            email.selected = false
+            Log.d(startUp+"unselect All-if",email.user + "  "+email.selected)
         }
     }
 

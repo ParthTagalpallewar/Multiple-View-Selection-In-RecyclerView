@@ -1,4 +1,4 @@
-package com.example.model
+package com.example.multiselectinrecyclerview.model
 
 data class Email(
     var user: String,

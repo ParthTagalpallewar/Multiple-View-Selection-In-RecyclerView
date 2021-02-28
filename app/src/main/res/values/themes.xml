@@ -12,4 +12,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/purple_200</item>        <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="Theme.MultiSelectInRecyclerVIew.ButtonStyle" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:textSize">17sp</item>
+
+    </style>
 </resources>

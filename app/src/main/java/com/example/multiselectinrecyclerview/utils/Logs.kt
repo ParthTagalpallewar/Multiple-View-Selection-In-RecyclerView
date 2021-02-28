@@ -1,8 +1,7 @@
-package com.example.utils
+package com.example.multiselectinrecyclerview.utils
 
-import android.nfc.Tag
 import android.util.Log
-import com.example.model.Email
+import com.example.multiselectinrecyclerview.model.Email
 
 fun ArrayList<Email>.log(tag:String="Logxyz"){
 

@@ -1,4 +1,4 @@
-package com.example.recyclerView
+package com.example.multiselectinrecyclerview.RecyclerWithActionMode.adapter
 
 import android.graphics.Color
 import android.util.SparseBooleanArray
@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.util.size
 import androidx.recyclerview.widget.RecyclerView
-import com.example.`interface`.CLickListnerInterface
-import com.example.model.Email
+import com.example.multiselectinrecyclerview.RecyclerWithActionMode.`interface`.CLickListnerInterface
+import com.example.multiselectinrecyclerview.model.Email
 import com.example.multiselectinrecyclerview.R
 import com.example.multiselectinrecyclerview.databinding.EmailItemBinding
-import com.example.utils.*
+import com.example.multiselectinrecyclerview.utils.*
 import java.util.*
 
 class RecyclerAdapter(val emails: ArrayList<Email>, val clickListener: CLickListnerInterface) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
