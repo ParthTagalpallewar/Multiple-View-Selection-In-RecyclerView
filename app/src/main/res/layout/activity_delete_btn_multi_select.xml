@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
 
+        <!--TAB TO SELECT-->
         <RelativeLayout
-            android:id="@+id/rv_selectDeleteBtn"
+            android:id="@+id/rv_deleteBtnLayout"
             android:layout_width="match_parent"
             android:visibility="gone"
             android:layout_height="match_parent"
@@ -33,6 +34,7 @@
                 android:layout_gravity="center_vertical"/>
 
             <ImageView
+                android:id="@+id/IV_deleteBtn"
                 android:layout_width="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_height="30dp"
@@ -47,31 +49,47 @@
 
         </RelativeLayout>
 
+        <!--SELECTING TO DELETE-->
         <RelativeLayout
-            android:id="@+id/rv_deleteAllBtn"
+            android:id="@+id/rv_okBtnLayout"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
 
+            <ImageView
+                android:id="@+id/IV_back"
+                android:layout_width="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="right"
+                android:src="@drawable/back_icon"/>
+
+
+
             <TextView
+                android:id="@+id/TV_selectedItems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:text="Gmails List"
-                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="0"
+                android:layout_toRightOf="@id/IV_back"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center_vertical"/>
 
             <ImageView
+                android:id="@+id/IV_tickBtn"
                 android:layout_width="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:layout_gravity="right"
-                android:background="@drawable/ic_delete_forever_black_24dp"/>
+                android:background="@drawable/seleted_delete"/>
 
 
 
@@ -80,11 +98,17 @@
         </RelativeLayout>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/holo_blue_bright"/>
     </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main"
+        android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_below="@id/toolbar_relativeLayout"

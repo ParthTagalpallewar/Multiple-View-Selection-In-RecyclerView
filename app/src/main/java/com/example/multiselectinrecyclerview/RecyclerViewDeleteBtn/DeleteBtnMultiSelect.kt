@@ -1,28 +1,35 @@
 package com.example.multiselectinrecyclerview.RecyclerWithActionMode
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.ActionMode
+import androidx.core.util.size
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.multiselectinrecyclerview.RecyclerViewDeleteBtn.`interface`.SecondItemViewClickListener
+import com.example.multiselectinrecyclerview.RecyclerViewDeleteBtn.adapter.SecondRecyclerView
+import com.example.multiselectinrecyclerview.databinding.ActivityDeleteBtnMultiSelectBinding
 import com.example.multiselectinrecyclerview.model.Email
-import com.example.multiselectinrecyclerview.databinding.ActivityRecyclerViewWithActionViewBinding
+import com.example.multiselectinrecyclerview.model.Emails
+import com.example.multiselectinrecyclerview.utils.*
 
-class DeleteBtnMultiSelect : AppCompatActivity() {
+class DeleteBtnMultiSelect : AppCompatActivity(), SecondItemViewClickListener {
 
     lateinit var allEmails: ArrayList<Email>
 
-    lateinit var binding: ActivityRecyclerViewWithActionViewBinding
+    lateinit var binding: ActivityDeleteBtnMultiSelectBinding
 
-    var actionMode:ActionMode? = null
-    lateinit var  callback : ActionMode.Callback
+    lateinit var mAdapter: SecondRecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityRecyclerViewWithActionViewBinding.inflate(layoutInflater)
+        binding = ActivityDeleteBtnMultiSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
-/*    override fun onStart() {
+    override fun onStart() {
         super.onStart()
 
         //getting emails data
@@ -30,14 +37,16 @@ class DeleteBtnMultiSelect : AppCompatActivity() {
 
         //setting it in recycler view
         setUpRecyclerVIew()
-        allEmails.log(startUp+" SetupRecyclerview")
+        allEmails.log(startUp + " SetupRecyclerview")
+
+
+        handelBtns()
 
     }
 
 
-
     private fun setUpRecyclerVIew() {
-        mAdapter = RecyclerAdapter(allEmails, this)
+        mAdapter = SecondRecyclerView(allEmails,this)
         binding.recyclerViewMain.also {
             it.layoutManager = LinearLayoutManager(this)
             it.adapter = mAdapter
@@ -45,70 +54,81 @@ class DeleteBtnMultiSelect : AppCompatActivity() {
         mAdapter.notifyDataSetChanged()
     }
 
-    //handeling item clicks
-    override fun onClick(position: Int) {
-        enableActionMode(position)
-    }
-    override fun onLongClick(position: Int) {
-        enableActionMode(position)
-    }
 
+    private fun handelBtns() {
+        binding.rvDeleteBtnLayout.show()
 
-
-
-    private fun enableActionMode(position: Int) {
-        //if it is not in action mode the start action mode
-        if (actionMode == null){
-            initActionModeCallback()
-            actionMode = startSupportActionMode(callback)
+        //delete btn click handeling
+        binding.IVDeleteBtn.setOnClickListener {
+            //On selection mode
+            moveToSelectionMode()
+        }
+        binding.IVBack.setOnClickListener {
+            moveToNormalMode()
         }
 
-        //else it is alredy in action mode
-        mAdapter.toggleSelection(position)//if select then dislection and vice versa
-
-        //handeling size to write in textview
-        handleSizeInTextView()
+        binding.IVTickBtn.setOnClickListener {
+            mAdapter.deleteEmails()
+            moveToNormalMode()
+        }
     }
 
-    private fun initActionModeCallback() {
-        callback = object : ActionMode.Callback{
-            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                mode!!.menuInflater.inflate(R.menu.menu_delete, menu)
-                return true
-            }
+    fun moveToSelectionMode() {
+        binding.TVSelectedItems.text = "0"
+        binding.rvOkBtnLayout.show()
+        binding.rvDeleteBtnLayout.hide()
+        mAdapter.selectionMode = true
+    }
 
-            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                return false
-            }
+    fun moveToNormalMode() {
+        binding.rvOkBtnLayout.hide()
+        binding.rvDeleteBtnLayout.show()
+        mAdapter.selectionMode = false
 
-            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                if (item!!.itemId == R.id.action_delete){
-                    mAdapter.deleteEmails()
-                    mode!!.finish()
-                    Log.d(startUp+DeleteItems,"Calling From Delete btn CLicked")
-                    return true
-                }
-                return false
-            }
 
-            override fun onDestroyActionMode(mode: ActionMode?) {
-                mAdapter.selectedItems.clear()
-                allEmails.unSelectAll()
-                mAdapter.notifyDataSetChanged()
-                actionMode = null
-            }
+        mAdapter.selectedItems.clear()
+        allEmails.unSelectAll()
+
+        Log.d(
+            startUp + "zyq",
+            "Destory Action mode called" + "\nseletedItems :- " + mAdapter.selectedItems.size
+        )
+        allEmails.log("DestoryMode-zuq-113")
+
+
+        mAdapter.notifyDataSetChanged()
+
+    }
+
+    override fun onClick(position: Int) {
+        if (mAdapter.selectionMode) {
+            //else it is alredy in action mode
+            mAdapter.toggleSelection(position)//if select then dislection and vice versa
+
+            //handeling size to write in textview
+            handleSizeInTextView()
+        } else {
+            Toast.makeText(this,allEmails[position].user,Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun handleSizeInTextView() {
         val size: Int = mAdapter.selectedItems.size()
-        if (size == 0) {
-            actionMode!!.finish()
-        } else {
-            actionMode!!.apply {
-                title = size.toString()
-                invalidate()
-            }
+        binding.TVSelectedItems.text = size.toString()
+
+
+    }
+
+
+    override fun onLongClick(position: Int) {
+        if (!mAdapter.selectionMode) {
+            moveToSelectionMode()
+            mAdapter.toggleSelection(position)//if select then dislection and vice versa
+
+            //handeling size to write in textview
+            handleSizeInTextView()
         }
-    }*/
+    }
+
+
 }
